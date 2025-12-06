@@ -9,6 +9,16 @@ import AuthLayouts from "../Layouts/AuthLayouts";
 import Login from "../Auth/Login";
 import Register from "../Auth/Register";
 import PrivateRoute from "./PrivateRoute";
+import ManageUsers from "../Dashboard/AdminDashboard/ManageUsers";
+import AllOrders from "../Dashboard/AdminDashboard/AllOrders";
+import ManageAllProducts from "../Dashboard/AdminDashboard/ManageAllProducts";
+import AddProducts from "../Dashboard/ManagerDashboard/AddProducts";
+import ManageProducts from "../Dashboard/ManagerDashboard/ManageProducts";
+import PendingOrders from "../Dashboard/ManagerDashboard/PendingOrders";
+import ApproveOrders from "../Dashboard/ManagerDashboard/ApproveOrders";
+import MyProfile from "../Dashboard/ManagerDashboard/MyProfile";
+import MyOrder from "../Dashboard/BuyerDashboard/MyOrder";
+import TrackOrder from "../Dashboard/BuyerDashboard/TrackOrder";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +67,43 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/manage-users",
-        
+        element: <ManageUsers/>
+      },
+      {
+        path: "/dashboard/all-products",
+        element: <ManageAllProducts/>
+      },
+      {
+        path: "/dashboard/all-orders",
+        element: <AllOrders/>
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <AddProducts/>
+      },
+      {
+        path: "/dashboard/manage-products",
+        element: <ManageProducts/>
+      },
+      {
+        path: "/dashboard/pending-orders",
+        element: <PendingOrders/>
+      },
+      {
+        path: "/dashboard/approve-orders",
+        element: <ApproveOrders/>
+      },
+      {
+        path: "/dashboard/my-profile",
+        element: <MyProfile/>
+      },
+      {
+        path: "/dashboard/my-order",
+        element: <MyOrder/>
+      },
+      {
+        path: "/dashboard/track-order",
+        element: <TrackOrder/>
       },
     ]
   },

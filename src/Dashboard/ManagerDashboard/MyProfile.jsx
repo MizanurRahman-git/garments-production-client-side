@@ -3,9 +3,9 @@ import React from 'react';
 const MyProfile = () => {
     return (
         <div>
-            My Profile for manager
+            My Profile for Everyone
         </div>
     );
 };
 
-export default MyProfile;
+export default MyProfile

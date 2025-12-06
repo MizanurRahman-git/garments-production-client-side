@@ -8,4 +8,4 @@ const PendingOrders = () => {
     );
 };
 
-export default PendingOrders;
+export default PendingOrders

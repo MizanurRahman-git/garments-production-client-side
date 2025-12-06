@@ -8,4 +8,4 @@ const ApproveOrders = () => {
     );
 };
 
-export default ApproveOrders;
+export default ApproveOrders

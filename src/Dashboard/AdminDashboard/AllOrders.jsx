@@ -8,4 +8,4 @@ const AllOrders = () => {
     );
 };
 
-export default AllOrders;
+export default AllOrders

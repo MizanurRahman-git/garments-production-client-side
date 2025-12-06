@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
-import logo from "../assets/logo (2).png";
+import Logo from "./Logo/Logo";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const [users, setUsers] = useState();
+  const { user, logOut } = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -16,13 +17,21 @@ const Navbar = () => {
     setTheme(checked ? "dark" : "light");
   };
 
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const links = (
     <>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/all-products">All-Products</NavLink>
       <NavLink to="/about-us">About Us</NavLink>
       <NavLink to="/contact">Contact</NavLink>
-      <NavLink to="/dashboard">Dashboard</NavLink>
+      {user && <NavLink to="/dashboard">Dashboard</NavLink>}
     </>
   );
 
@@ -58,20 +67,19 @@ const Navbar = () => {
           to="/"
           className="flex items-center  font-medium cursor-pointer text-xl"
         >
-          <img className="w-14 rounded-full" src={logo} alt="" />
-          <span className="hidden sm:block"> PawMart</span>
+          <Logo />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-5 px-1">{links}</ul>
       </div>
       <div className="navbar-end gap-5">
-        {users ? (
+        {user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="">
               <img
                 className="w-14 rounded-full border"
-                src={users.photoURL}
+                src={user.photoURL}
                 alt="image"
               />
             </div>
@@ -80,10 +88,10 @@ const Navbar = () => {
               className="menu dropdown-content bg-base-200 rounded-box z-10 mt-4 w-52 p-2 shadow-sm"
             >
               <li>
-                <button>Log Out</button>
+                <button onClick={handleLogOut}>Log Out</button>
               </li>
               <li>
-                <p>{users.displayName}</p>
+                <p>{user.displayName}</p>
               </li>
               <li>
                 <p>Theme</p>

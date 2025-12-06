@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD_Irw5cN7SxDrgYBv9Xg2qqpsqcJ-M6KY",
-  authDomain: "garments-production.firebaseapp.com",
-  projectId: "garments-production",
-  storageBucket: "garments-production.firebasestorage.app",
-  messagingSenderId: "772235359740",
-  appId: "1:772235359740:web:624ade594d2d59d5a72e79"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

@@ -19,6 +19,9 @@ import ApproveOrders from "../Dashboard/ManagerDashboard/ApproveOrders";
 import MyProfile from "../Dashboard/ManagerDashboard/MyProfile";
 import MyOrder from "../Dashboard/BuyerDashboard/MyOrder";
 import TrackOrder from "../Dashboard/BuyerDashboard/TrackOrder";
+import ProductDetails from "../Components/ProductDetails/ProductDetails";
+import OrderForm from "../Components/OrderForm/OrderForm";
+import PaymentSuccess from "../Components/Payments/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,26 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/productDetails/:id",
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/orderform/:id",
+        element: (
+          <PrivateRoute>
+            <OrderForm />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment-success",
+        element: <PaymentSuccess/>
       },
     ],
   },
@@ -67,45 +90,45 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers/>
+        element: <ManageUsers />,
       },
       {
         path: "/dashboard/all-products",
-        element: <ManageAllProducts/>
+        element: <ManageAllProducts />,
       },
       {
         path: "/dashboard/all-orders",
-        element: <AllOrders/>
+        element: <AllOrders />,
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProducts/>
+        element: <AddProducts />,
       },
       {
         path: "/dashboard/manage-products",
-        element: <ManageProducts/>
+        element: <ManageProducts />,
       },
       {
         path: "/dashboard/pending-orders",
-        element: <PendingOrders/>
+        element: <PendingOrders />,
       },
       {
         path: "/dashboard/approve-orders",
-        element: <ApproveOrders/>
+        element: <ApproveOrders />,
       },
       {
         path: "/dashboard/my-profile",
-        element: <MyProfile/>
+        element: <MyProfile />,
       },
       {
         path: "/dashboard/my-order",
-        element: <MyOrder/>
+        element: <MyOrder />,
       },
       {
         path: "/dashboard/track-order",
-        element: <TrackOrder/>
+        element: <TrackOrder />,
       },
-    ]
+    ],
   },
 ]);
 

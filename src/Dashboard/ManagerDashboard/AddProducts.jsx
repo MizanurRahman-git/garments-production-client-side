@@ -34,7 +34,8 @@ const AddProducts = () => {
         minimumQuantity: data.minimumQuantity,
         paymentOptions: data.paymentOptions,
         videoLink: data.videoLink,
-        managerEmail: user.email
+        managerEmail: user.email,
+        sellerName: user?.displayName
       };
 
       axiosInstance.post("/products", ProductInfo).then((res) => {

@@ -33,10 +33,10 @@ const OrderForm = () => {
 
 
 
-  const handlePayment = (info) => {
+  const handlePayment = async(info) =>{
     info.id = _id;
-    const {data} = axiosInstance.post("/create-checkout-session", info);
-    window.location.href = data.url
+    const {data} = await axiosInstance.post('/create-checkout-session', info);
+    window.location.href = data.url;
   };
 
 

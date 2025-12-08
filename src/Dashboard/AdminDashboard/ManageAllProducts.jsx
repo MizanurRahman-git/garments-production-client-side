@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import useAxios from "../../Hooks/useAxios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Link } from "react-router";
 
 const ManageAllProducts = () => {
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   const { data: products = [] } = useQuery({
     queryKey: ["all-products"],
     queryFn: async () => {
-      const result = await axiosInstance.get("/products");
+      const result = await axiosSecure("/products");
       return result.data;
     },
   });
@@ -40,7 +41,10 @@ const ManageAllProducts = () => {
               <td>{product.productPrice}</td>
               <td>{product.category}</td>
               <td>{product.sellerName}</td>
-              <td>{product.checkbox}</td>
+              <td>
+                <Link to={`/dashboard/product-edit-page/${product._id}`} className="btn ">Update</Link>
+                <button className="btn ms-">Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -22,6 +22,9 @@ import TrackOrder from "../Dashboard/BuyerDashboard/TrackOrder";
 import ProductDetails from "../Components/ProductDetails/ProductDetails";
 import OrderForm from "../Components/OrderForm/OrderForm";
 import PaymentSuccess from "../Components/Payments/PaymentSuccess";
+import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
+import ProductEditPage from "../Components/ProductEditPage/ProductEditPage";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment-success",
-        element: <PaymentSuccess/>
+        element: <PaymentSuccess />,
       },
     ],
   },
@@ -90,31 +93,59 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-products",
-        element: <ManageAllProducts />,
+        element: (
+          <AdminRoute>
+            <ManageAllProducts />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/all-orders",
-        element: <AllOrders />,
+        element: (
+          <AdminRoute>
+            <AllOrders />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProducts />,
+        element: (
+            <ManagerRoute>
+              <AddProducts />
+            </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/manage-products",
-        element: <ManageProducts />,
+        element: (
+          <ManagerRoute>
+            <ManageProducts />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/pending-orders",
-        element: <PendingOrders />,
+        element: (
+          <ManagerRoute>
+            <PendingOrders />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/approve-orders",
-        element: <ApproveOrders />,
+        element: (
+          <ManagerRoute>
+            <ApproveOrders />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/my-profile",
@@ -127,6 +158,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/track-order",
         element: <TrackOrder />,
+      },
+      {
+        path: "/dashboard/product-edit-page/:id",
+        element: <ProductEditPage/>,
       },
     ],
   },

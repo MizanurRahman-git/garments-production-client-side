@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
-import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const OrderForm = () => {
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { id } = useParams();
   const [quantity, setQuantity] = useState(0);
@@ -14,7 +14,7 @@ const OrderForm = () => {
   const { data: product = {} } = useQuery({
     queryKey: ["product", id],
     queryFn: async () => {
-      const result = await axiosInstance.get(`/product/${id}`);
+      const result = await axiosSecure.get(`/product/${id}`);
       return result.data;
     },
   });
@@ -35,7 +35,7 @@ const OrderForm = () => {
 
   const handlePayment = async(info) =>{
     info.id = _id;
-    const {data} = await axiosInstance.post('/create-checkout-session', info);
+    const {data} = await axiosSecure.post('/create-checkout-session', info);
     window.location.href = data.url;
   };
 

@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link, useParams } from "react-router";
-import useAxios from "../../Hooks/useAxios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const ProductDetails = () => {
-  const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
 
   const { data: product = {} } = useQuery({
     queryKey: ["product", id],
     queryFn: async () => {
-      const result = await axiosInstance.get(`/product/${id}`);
+      const result = await axiosSecure.get(`/product/${id}`);
       return result.data;
     },
   });

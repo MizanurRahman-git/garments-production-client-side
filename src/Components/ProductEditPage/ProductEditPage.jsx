@@ -1,57 +1,31 @@
-import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useParams } from "react-router";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
-import useAxios from "../../Hooks/useAxios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
-import useAuth from "../../Hooks/useAuth";
 
-const AddProducts = () => {
-    const {user} = useAuth()
-  const axiosInstance = useAxios();
-  const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+const ProductEditPage = () => {
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
 
-  const handleAddProduct = (data) => {
-    const profileImage = data.image[0];
-    const formData = new FormData();
-    formData.append("image", profileImage);
-    const imageURL_API = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_imagebbAPI
-    }`;
-    axios.post(imageURL_API, formData).then((res) => {
-      const ProductInfo = {
-        productName: data.productName,
-        productPrice: data.productPrice,
-        category: data.category,
-        availableQuantity: data.availableQuantity,
-        checkbox: data.checkbox,
-        description: data.decription,
-        image: res.data.data.url,
-        minimumQuantity: data.minimumQuantity,
-        paymentOptions: data.paymentOptions,
-        videoLink: data.videoLink,
-        managerEmail: user.email,
-        sellerName: user?.displayName
-      };
+   const { register, handleSubmit } = useForm();
 
-      axiosInstance.post("/products", ProductInfo).then((res) => {
-        if (res.data.insertedId) {
-          navigate("/");
-          Swal.fire({
-            title: "Product Add Successfuly!",
-            icon: "success",
-            draggable: true,
-          });
-        }
-      });
-    });
-  };
+  const { data: product = {} } = useQuery({
+    queryKey: ["product-edit", id],
+    queryFn: async () => {
+      const result = await axiosSecure(`/product/${id}`);
+      return result.data;
+    },
+  });
+
+  const handleEditProduct = (data)=> {
+    console.log(data)
+  }
   return (
     <div className="w-11/12 mx-auto mt-2.5">
-      <h2 className="text-5xl font-bold">Add Product</h2>
+      <h2 className="text-5xl font-bold">Edit Product</h2>
       <h2 className="text-2xl font-semibold">Product Details</h2>
-      <form onSubmit={handleSubmit(handleAddProduct)} className="mt-10">
+      <form onSubmit={handleSubmit(handleEditProduct)} className="mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <fieldset className="fieldset">
             <label className="label text-black font-semibold">
@@ -59,6 +33,7 @@ const AddProducts = () => {
             </label>
             <input
               type="text"
+              defaultValue={product.productName}
               {...register("productName")}
               className="input w-full"
               placeholder="Product Name"
@@ -70,6 +45,7 @@ const AddProducts = () => {
             </label>
             <input
               type="number"
+              defaultValue={product.productPrice}
               {...register("productPrice")}
               className="input w-full"
               placeholder="Product Price"
@@ -77,17 +53,16 @@ const AddProducts = () => {
           </fieldset>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Product information */}
           <fieldset className="fieldset">
             <label className="label text-black font-semibold">
               Product Category
             </label>
             <select
+              defaultValue={product.category}
               {...register("category", { required: true })}
-              defaultValue="Pick a Item"
               className="select w-full"
             >
-              <option disabled={true}>Pick a Item</option>
+              <option disabled={true}>{product.category}</option>
               <option>Shirt</option>
               <option>Pant</option>
               <option>Jacket</option>
@@ -99,7 +74,8 @@ const AddProducts = () => {
             </label>
             <textarea
               type="text"
-              {...register("decription")}
+              defaultValue={product.description}
+              {...register("description")}
               className="input w-full h-20"
               placeholder="Description"
             />
@@ -109,6 +85,7 @@ const AddProducts = () => {
             </label>
             <input
               type="number"
+              defaultValue={product.availableQuantity}
               {...register("availableQuantity")}
               className="input w-full"
               placeholder="Available Quantity"
@@ -119,11 +96,11 @@ const AddProducts = () => {
             </label>
             <input
               type="number"
+              defaultValue={product.minimumQuantity}
               {...register("minimumQuantity")}
               className="input w-full"
               placeholder="Minimum"
             />
-            <label className="label">Minimum 500 products</label>
           </fieldset>
 
           <fieldset className="fieldset">
@@ -144,6 +121,7 @@ const AddProducts = () => {
             </label>
             <input
               type="text"
+              defaultValue={product.videoLink}
               {...register("videoLink")}
               className="input w-full"
               placeholder="Video Link"
@@ -154,36 +132,23 @@ const AddProducts = () => {
             </label>
             <select
               {...register("paymentOptions", { required: true })}
-              defaultValue="Pick a Item"
+              defaultValue={product.paymentOptions}
               className="select w-full"
             >
-              <option disabled={true}>Pick a Item</option>
+              <option disabled={true}>{product.paymentOptions}</option>
               <option>Cash On Delivery</option>
               <option>PayFast</option>
             </select>
-
-            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4">
-              <legend className="fieldset-legend">Show On</legend>
-              <label className="label">
-                <input
-                  type="radio"
-                  value="Show"
-                  {...register("checkbox")}
-                  className="radio"
-                />
-                Show on Home Page
-              </label>
-            </fieldset>
           </fieldset>
         </div>
         <input
           type="submit"
-          className="btn btn-primary text-black w-full mt-5"
-          value="Send Parcel"
+          className="btn btn-primary text-white w-full mt-5"
+          value="Update Product"
         />
       </form>
     </div>
   );
 };
 
-export default AddProducts;
+export default ProductEditPage;

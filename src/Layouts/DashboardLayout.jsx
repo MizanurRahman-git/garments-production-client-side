@@ -2,10 +2,19 @@ import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { FaCartArrowDown, FaHome, FaUserPlus } from "react-icons/fa";
 import { FaMapLocationDot } from "react-icons/fa6";
-import { MdAddCard, MdManageAccounts, MdOutlineSupportAgent, MdPendingActions, MdProductionQuantityLimits, MdShoppingCart } from "react-icons/md";
+import {
+  MdAddCard,
+  MdManageAccounts,
+  MdOutlineSupportAgent,
+  MdPendingActions,
+  MdProductionQuantityLimits,
+  MdShoppingCart,
+} from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const [role] = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -63,86 +72,129 @@ const DashboardLayout = () => {
             </li>
 
             {/* Admin Links */}
-            <li>
-              <NavLink
-                to="/dashboard/manage-users"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Manage User"
-              >
-                <FaUserPlus />
+            {role === "Admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-users"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage User"
+                  >
+                    <FaUserPlus />
 
-                <span className="is-drawer-close:hidden">Manage User</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/all-products"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="All Products"
-              >
-                <MdProductionQuantityLimits />
+                    <span className="is-drawer-close:hidden">Manage User</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/all-products"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="All Products"
+                  >
+                    <MdProductionQuantityLimits />
 
-                <span className="is-drawer-close:hidden">All Products</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/all-orders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="All Orders"
-              >
-                <MdShoppingCart />
+                    <span className="is-drawer-close:hidden">All Products</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/all-orders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="All Orders"
+                  >
+                    <MdShoppingCart />
 
-                <span className="is-drawer-close:hidden">All Orders</span>
-              </NavLink>
-            </li>
-
+                    <span className="is-drawer-close:hidden">All Orders</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* manager dashboard */}
-            <li>
-              <NavLink
-                to="/dashboard/add-product"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Add Product"
-              >
-                <MdAddCard />
 
-                <span className="is-drawer-close:hidden">Add Product</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/manage-products"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Manage Product"
-              >
-                <MdManageAccounts />
+            {role === "Manager" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/add-product"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Add Product"
+                  >
+                    <MdAddCard />
 
-                <span className="is-drawer-close:hidden">Manage Product</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/pending-orders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Pending Orders"
-              >
-                <MdPendingActions />
+                    <span className="is-drawer-close:hidden">Add Product</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manage-products"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage Product"
+                  >
+                    <MdManageAccounts />
 
-                <span className="is-drawer-close:hidden">Pending Orders</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/approve-orders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Approve Orders"
-              >
-                <MdOutlineSupportAgent />
+                    <span className="is-drawer-close:hidden">
+                      Manage Product
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/pending-orders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Pending Orders"
+                  >
+                    <MdPendingActions />
 
-                <span className="is-drawer-close:hidden">Approve Orders</span>
-              </NavLink>
-            </li>
+                    <span className="is-drawer-close:hidden">
+                      Pending Orders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/approve-orders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Orders"
+                  >
+                    <MdOutlineSupportAgent />
+
+                    <span className="is-drawer-close:hidden">
+                      Approve Orders
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {/* buyer dashboard */}
+
+            {role === "Buyer" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-order"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My Order"
+                  >
+                    <FaCartArrowDown />
+
+                    <span className="is-drawer-close:hidden">My Order</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/track-order"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Track Order"
+                  >
+                    <FaMapLocationDot />
+
+                    <span className="is-drawer-close:hidden">Track Order</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
               <NavLink
                 to="/dashboard/my-profile"
@@ -152,30 +204,6 @@ const DashboardLayout = () => {
                 <CgProfile />
 
                 <span className="is-drawer-close:hidden">My Profile</span>
-              </NavLink>
-            </li>
-
-            {/* buyer dashboard */}
-            <li>
-              <NavLink
-                to="/dashboard/my-order"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="My Order"
-              >
-                <FaCartArrowDown />
-
-                <span className="is-drawer-close:hidden">My Order</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/track-order"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Track Order"
-              >
-                <FaMapLocationDot />
-
-                <span className="is-drawer-close:hidden">Track Order</span>
               </NavLink>
             </li>
           </ul>

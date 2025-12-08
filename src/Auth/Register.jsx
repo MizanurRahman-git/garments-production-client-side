@@ -35,7 +35,7 @@ const Register = () => {
             email: data.email,
             displayName:data.name,
             photoURL:res.data.data.display_url,
-            Role: data.role
+            role: data.role
           }
           axiosIntance.post('/users', userInfo)
           .then(res => {

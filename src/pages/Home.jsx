@@ -1,9 +1,12 @@
 import React from 'react';
+import HeroPage from '../Components/HeroPage/HeroPage';
+import DisplayProduct from '../Components/DisplayProduct/DisplayProduct';
 
 const Home = () => {
     return (
         <div>
-            <h1 className='text-4xl text-blue-700'>Home</h1>
+            <HeroPage/>
+            <DisplayProduct/>
         </div>
     );
 };

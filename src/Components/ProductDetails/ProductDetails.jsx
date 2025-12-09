@@ -38,7 +38,6 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="md:gap-10 flex-1">
-        {/* Plant Info */}
         <h1 className="font-bold text-3xl">{productName}</h1>
         <hr className="my-6" />
         <div>

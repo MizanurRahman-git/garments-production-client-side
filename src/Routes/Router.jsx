@@ -25,6 +25,7 @@ import PaymentSuccess from "../Components/Payments/PaymentSuccess";
 import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
 import ProductEditPage from "../Components/ProductEditPage/ProductEditPage";
+import OrderDetails from "../Components/OrderDetails/OrderDetails";
 
 const router = createBrowserRouter([
   {
@@ -116,11 +117,15 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/order-details/:id",
+        element: <OrderDetails />,
+      },
+      {
         path: "/dashboard/add-product",
         element: (
-            <ManagerRoute>
-              <AddProducts />
-            </ManagerRoute>
+          <ManagerRoute>
+            <AddProducts />
+          </ManagerRoute>
         ),
       },
       {
@@ -161,7 +166,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/product-edit-page/:id",
-        element: <ProductEditPage/>,
+        element: <ProductEditPage />,
       },
     ],
   },

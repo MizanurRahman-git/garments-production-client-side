@@ -1,21 +1,51 @@
 import React from "react";
 import useAuth from "../Hooks/useAuth";
+import useAxios from "../Hooks/useAxios";
+import { useNavigate } from "react-router";
+import { Bounce, toast } from "react-toastify";
 
 const SocialLink = () => {
-  const {signWithGoogle} = useAuth()
-  const handleGoogle = () =>{
+  const { signWithGoogle } = useAuth();
+  const axiosIntance = useAxios()
+  const navigate = useNavigate()
+
+  const handleGoogle = () => {
     signWithGoogle()
-    .then(res=> {
-      console.log(res)
-    })
-    .catch((error) => {
+      .then((result) => {
+        console.log(result);
+        const userInfo = {
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+          role: "Buyer"
+        };
+
+        axiosIntance.post("/users", userInfo).then((res) => {
+          navigate(location?.state || "/");
+          console.log(res.data);
+          if (res.data.insertedId) {
+            toast.success("🦄 Welcome!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          }
+        });
+      })
+      .catch((error) => {
         console.log(error);
       });
-  }
+  };
   return (
     <div>
       <button
-      onClick={handleGoogle}
+        onClick={handleGoogle}
         className="btn bg-gray-200 w-full text-black border-[#e5e5e5]"
       >
         <svg

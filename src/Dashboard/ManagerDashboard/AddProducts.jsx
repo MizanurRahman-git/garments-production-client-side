@@ -123,7 +123,6 @@ const AddProducts = () => {
               className="input w-full"
               placeholder="Minimum"
             />
-            <label className="label">Minimum 500 products</label>
           </fieldset>
 
           <fieldset className="fieldset">
@@ -178,8 +177,8 @@ const AddProducts = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-primary text-black w-full mt-5"
-          value="Send Parcel"
+          className="btn btn-primary text-white w-full mt-5"
+          value="Add Product"
         />
       </form>
     </div>

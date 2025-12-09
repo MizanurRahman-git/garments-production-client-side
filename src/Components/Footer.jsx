@@ -8,10 +8,10 @@ const Footer = () => {
       <aside>
         <div className="flex flex-col sm:flex-row items-center gap-5">
           <img className="w-18 rounded-full" src={logo} alt="" />
-          <h1 className="font-semibold text-xl">PawMart Industries Ltd.</h1>
+          <h1 className="font-semibold text-xl">Fabric Fusion Industries Ltd.</h1>
         </div>
         <p className="font-semibold">
-          PawMart connects local pet owners and buyers for adoption and pet care
+          Fabric Fusion connects local pet owners and buyers for adoption and pet care
           products.
         </p>
         <p className="font-bold">Providing reliable tech since 2000</p>

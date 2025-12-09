@@ -5,11 +5,12 @@ import SocialLink from "./SocialLink";
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
 import useAxios from "../Hooks/useAxios";
+import { Bounce, toast } from "react-toastify";
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { registerUser, updateuserProfile } = useAuth();
-  const axiosIntance = useAxios()
+  const axiosIntance = useAxios();
 
   const {
     register,
@@ -28,21 +29,28 @@ const Register = () => {
         const imageURL_API = `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_imagebbAPI
         }`;
-        axios.post(imageURL_API, formData)
-        .then((res) => {
-
+        axios.post(imageURL_API, formData).then((res) => {
           const userInfo = {
             email: data.email,
-            displayName:data.name,
-            photoURL:res.data.data.display_url,
-            role: data.role
-          }
-          axiosIntance.post('/users', userInfo)
-          .then(res => {
-            if(res.data.insertedId){
-              console.log('user set on database')
+            displayName: data.name,
+            photoURL: res.data.data.display_url,
+            role: data.role,
+          };
+          axiosIntance.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              toast.success("🦄 Wow Register Successfuly!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+              });
             }
-          })
+          });
 
           const userProfile = {
             displayName: data.name,

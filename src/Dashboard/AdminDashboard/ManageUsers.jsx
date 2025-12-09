@@ -32,7 +32,7 @@ const ManageUsers = () => {
         if (res.data.modifiedCount) {
           refetch();
           riderModalRef.current.close();
-          toast.success("✅ User Role Updated!", {
+          toast.success("User Role Updated!", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

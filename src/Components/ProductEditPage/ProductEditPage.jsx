@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const ProductEditPage = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
+  const navigate = useNavigate()
 
-   const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { data: product = {} } = useQuery({
     queryKey: ["product-edit", id],
@@ -18,9 +21,39 @@ const ProductEditPage = () => {
     },
   });
 
-  const handleEditProduct = (data)=> {
-    console.log(data)
-  }
+  const handleEditProduct = (data) => {
+    const profileImage = data.image[0];
+    const formData = new FormData();
+    formData.append("image", profileImage);
+    const imageURL_API = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_imagebbAPI
+    }`;
+    axios.post(imageURL_API, formData).then((res) => {
+      const ProductInfo = {
+        productName: data.productName,
+        productPrice: data.productPrice,
+        category: data.category,
+        availableQuantity: data.availableQuantity,
+        description: data.description,
+        image: res.data.data.url,
+        minimumQuantity: data.minimumQuantity,
+        paymentOptions: data.paymentOptions,
+        videoLink: data.videoLink,
+      };
+
+      axiosSecure.patch(`/product/${id}`, ProductInfo).then((res) => {
+        if (res.data.modifiedCount) {
+          navigate("/");
+          Swal.fire({
+            title: "Product Update Successfuly!",
+            icon: "success",
+            draggable: true,
+          });
+        }
+      });
+    });
+    ;
+  };
   return (
     <div className="w-11/12 mx-auto mt-2.5">
       <h2 className="text-5xl font-bold">Edit Product</h2>

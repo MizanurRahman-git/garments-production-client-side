@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
         <img
           src={image}
           alt=""
-          className="rounded-xl w-100 h-50 object-cover"
+          className="rounded-xl w-100 h-80 object-cover"
         />
       </figure>
       <div className="">
@@ -41,7 +41,7 @@ const ProductCard = ({ product }) => {
             to={`/productDetails/${_id}`}
             className="bg-blue-800 text-white px-4 py-2 w-full flex items-center justify-between text-xl"
           >
-            <span>See Details</span>{" "}
+            <span>View Details</span>{" "}
             <span>
               {" "}
               <FaArrowRightLong />{" "}

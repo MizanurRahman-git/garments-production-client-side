@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div className="flex gap-2.5 items-center">
       <img className="w-16 rounded-full" src={logo} alt="logo" />
-      <h1 className="font-bold text-xl -ms-3">Fabric Fusion</h1>
+      <h1 className="font-bold text-xl -ms-3">FEBRIC FASION</h1>
     </div>
   );
 };

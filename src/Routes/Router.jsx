@@ -26,6 +26,7 @@ import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
 import ProductEditPage from "../Components/ProductEditPage/ProductEditPage";
 import OrderDetails from "../Components/OrderDetails/OrderDetails";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -170,6 +171,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <ErrorPage/>
+  }
 ]);
 
 export default router;

@@ -23,11 +23,8 @@ const MyProfile = () => {
             />
           </a>
 
-          <p className="p-2 px-4 text-xs text-white bg-lime-500 rounded-full">
+          <p className="p-2 px-4 text-sm font-semibold text-white bg-black rounded-full">
             {role}
-          </p>
-          <p className="mt-2 text-xl font-medium text-gray-800 ">
-            User Id: {user?.uid}
           </p>
           <div className="w-full p-2 mt-4 rounded-lg">
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
@@ -43,10 +40,10 @@ const MyProfile = () => {
               </p>
 
               <div>
-                <button className="bg-lime-500  px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800 block mb-1">
+                <button className="bg-black font-semibold text-sm  px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800 block mb-1">
                   Update Profile
                 </button>
-                <button className="bg-lime-500 px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800">
+                <button className="bg-black font-semibold text-sm px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800">
                   Change Password
                 </button>
               </div>

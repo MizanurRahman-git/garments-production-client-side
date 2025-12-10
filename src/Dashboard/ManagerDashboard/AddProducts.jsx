@@ -48,7 +48,7 @@ const AddProducts = () => {
     });
   };
   return (
-    <div className="w-11/12 mx-auto mt-2.5">
+    <div className="w-11/12 mx-auto mt-2.5 my-10">
       <h2 className="text-5xl font-bold">Add Product</h2>
       <h2 className="text-2xl font-semibold">Product Details</h2>
       <form onSubmit={handleSubmit(handleAddProduct)} className="mt-10">
@@ -177,7 +177,7 @@ const AddProducts = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-primary text-white w-full mt-5"
+          className="btn btn-primary text-white w-full mt-5 mb-10"
           value="Add Product"
         />
       </form>

@@ -50,7 +50,7 @@ const ManageUsers = () => {
       });
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto w-11/12 mx-auto">
       <table className="table table-zebra">
         {/* head */}
         <thead>

@@ -43,7 +43,7 @@ const DashboardLayout = () => {
             </svg>
           </label>
           <div className="px-4">
-            <h1>Inventor</h1>
+            <h1>Dashboard</h1>
           </div>
         </nav>
         {/* Page content here */}

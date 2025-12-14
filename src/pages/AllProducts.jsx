@@ -18,6 +18,7 @@ const AllProducts = () => {
 
   return (
     <div className="my-10">
+      <title>All-Products</title>
       <div className="flex flex-col md:flex-row justify-between my-5 items-center px-3.5">
         <h1 className="font-bold text-2xl">Available Products:</h1>
         <label className="input">

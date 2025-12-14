@@ -47,6 +47,7 @@ const AllOrders = () => {
 
   return (
     <div className="overflow-x-auto w-11/12 mx-auto">
+      <title>Manage-All-Orders</title>
       <div className="flex flex-col md:flex-row justify-between my-5 items-center px-6">
         <h1 className="font-bold text-2xl">All Orders:</h1>
         <label className="input">

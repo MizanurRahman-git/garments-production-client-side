@@ -44,6 +44,7 @@ const ManageAllProducts = () => {
   };
   return (
     <div className="overflow-x-auto">
+      <title>Manage-All-Products</title>
       <table className="table table-zebra">
         {/* head */}
         <thead>

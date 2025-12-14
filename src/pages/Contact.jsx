@@ -4,6 +4,7 @@ const Contact = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 my-10 gap-10 items-center">
       <div>
+        <title>Contact</title>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <fieldset className="fieldset">

@@ -17,6 +17,7 @@ const MyOrder = () => {
 
   return (
     <div className="overflow-x-auto">
+      <title>My-Orders</title>
       <table className="table table-zebra">
         <thead>
           <tr>

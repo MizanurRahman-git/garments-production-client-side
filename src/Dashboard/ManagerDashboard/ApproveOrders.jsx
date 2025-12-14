@@ -15,6 +15,7 @@ const ApproveOrders = () => {
   });
   return (
     <div className="overflow-x-auto">
+      <title>Approve-Orders</title>
       <table className="table table-zebra">
         <thead>
           <tr>

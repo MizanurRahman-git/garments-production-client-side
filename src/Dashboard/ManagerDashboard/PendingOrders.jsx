@@ -44,6 +44,7 @@ const PendingOrders = () => {
   };
   return (
     <div className="overflow-x-auto">
+      <title>Panding-Products</title>
       <table className="table table-zebra">
         <thead>
           <tr>

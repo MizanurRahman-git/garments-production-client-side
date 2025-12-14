@@ -43,6 +43,7 @@ const OrderForm = () => {
 
   return (
     <div className="w-11/12 mx-auto my-10 mt-2.5">
+      <title>Order-Form</title>
       <h2 className="text-5xl font-bold">Payment</h2>
       <h2 className="text-xl font-semibold mt-2.5">
         Check your Product Info: and Input your Informations

@@ -72,6 +72,7 @@ const Register = () => {
   };
   return (
     <div className="card bg-base-100 w-full max-w-sm mx-auto shrink-0">
+      <title>Registration</title>
       <div className="card-body">
         <h1 className="text-4xl font-bold">Create an Account</h1>
         <h1 className="">Register with Garments</h1>

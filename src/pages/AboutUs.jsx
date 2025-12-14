@@ -5,6 +5,7 @@ import workingImg from '../assets/working.jpg'
 const AboutUs = () => {
     return (
         <div>
+            <title>About-Us</title>
             <div className='grid grid-cols-1 md:grid-cols-2 items-center gap-5'>
                 <div className='space-y-3'> 
                     <h1 className='font-bold text-6xl shadow-xl rounded-2xl border-b-2'>FEBRIC FASSION</h1>

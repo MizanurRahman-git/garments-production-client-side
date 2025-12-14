@@ -49,6 +49,7 @@ const ManageProducts = () => {
   };
   return (
     <div className="overflow-x-auto w-11/12 mx-auto">
+      <title>Manage-Products</title>
       <div className="flex flex-col md:flex-row justify-between my-5 items-center mx-10">
         <h1 className="font-bold text-2xl">All Products:</h1>
         <label className="input">

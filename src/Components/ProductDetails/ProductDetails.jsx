@@ -26,6 +26,7 @@ const ProductDetails = () => {
   } = product;
   return (
     <div className="mx-auto my-10 flex flex-col lg:flex-row justify-between w-full gap-12">
+      <title>{productName}</title>
       <div className="flex flex-col gap-6 flex-1">
         <div>
           <div className="w-full overflow-hidden rounded-xl">

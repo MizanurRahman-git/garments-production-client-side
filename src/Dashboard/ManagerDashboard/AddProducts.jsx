@@ -10,7 +10,7 @@ const AddProducts = () => {
     const {user} = useAuth()
   const axiosInstance = useAxios();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const handleAddProduct = (data) => {
     const profileImage = data.image[0];
@@ -60,10 +60,13 @@ const AddProducts = () => {
             </label>
             <input
               type="text"
-              {...register("productName")}
+              {...register("productName", {required: true})}
               className="input w-full"
               placeholder="Product Name"
             />
+            {errors.productName?.type === "required" && (
+              <p className="text-red-500">Name is Required</p>
+            )}
           </fieldset>
           <fieldset className="fieldset">
             <label className="label text-black font-semibold">
@@ -71,14 +74,16 @@ const AddProducts = () => {
             </label>
             <input
               type="number"
-              {...register("productPrice")}
+              {...register("productPrice", {required: true})}
               className="input w-full"
               placeholder="Product Price"
             />
+            {errors.productPrice?.type === "required" && (
+              <p className="text-red-500">Price is Required</p>
+            )}
           </fieldset>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Product information */}
           <fieldset className="fieldset">
             <label className="label text-black font-semibold">
               Product Category
@@ -94,36 +99,48 @@ const AddProducts = () => {
               <option>Jacket</option>
               <option>Accessories</option>
             </select>
+            {errors.category?.type === "required" && (
+              <p className="text-red-500">Category is Required</p>
+            )}
 
             <label className="label text-black font-semibold">
               Product Description
             </label>
             <textarea
               type="text"
-              {...register("decription")}
+              {...register("decription", {required: true})}
               className="input w-full h-20"
               placeholder="Description"
             />
+            {errors.decription?.type === "required" && (
+              <p className="text-red-500">Description is Required</p>
+            )}
 
             <label className="label text-black font-semibold">
               Available Quantity
             </label>
             <input
               type="number"
-              {...register("availableQuantity")}
+              {...register("availableQuantity", {required: true})}
               className="input w-full"
               placeholder="Available Quantity"
             />
+            {errors.availableQuantity?.type === "required" && (
+              <p className="text-red-500">Available Quantity is Required</p>
+            )}
 
             <label className="label text-black font-semibold">
-              Minimum Quantity
+              Minimum Order
             </label>
             <input
               type="number"
-              {...register("minimumQuantity")}
+              {...register("minimumQuantity", {required: true})}
               className="input w-full"
               placeholder="Minimum"
             />
+            {errors.minimumQuantity?.type === "required" && (
+              <p className="text-red-500">Minimum Quantity is Required</p>
+            )}
           </fieldset>
 
           <fieldset className="fieldset">
@@ -138,16 +155,22 @@ const AddProducts = () => {
               className="file-input"
               placeholder="Image"
             />
+            {errors.image?.type === "required" && (
+              <p className="text-red-500">Image is Required</p>
+            )}
 
             <label className="label text-black font-semibold">
               Demo Video Link
             </label>
             <input
               type="text"
-              {...register("videoLink")}
+              {...register("videoLink", {required: true})}
               className="input w-full"
               placeholder="Video Link"
             />
+            {errors.videoLink?.type === "required" && (
+              <p className="text-red-500">Video Link is Required</p>
+            )}
 
             <label className="label text-black font-semibold">
               Payment Options
@@ -161,6 +184,9 @@ const AddProducts = () => {
               <option>Cash On Delivery</option>
               <option>PayFast</option>
             </select>
+            {errors.paymentOptions?.type === "required" && (
+              <p className="text-red-500">Payment Options is Required</p>
+            )}
 
             <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4">
               <legend className="fieldset-legend">Show On</legend>

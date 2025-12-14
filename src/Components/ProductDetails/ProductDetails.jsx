@@ -83,7 +83,7 @@ const ProductDetails = () => {
                 text-neutral-500
               "
           >
-            Order Quantity: {minimumQuantity} Only!
+           Minimum Order: {minimumQuantity} Only!
           </p>
         </div>
         <hr className="my-6" />

@@ -23,7 +23,7 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/products")
+    fetch("https://garments-production-server.vercel.app/products")
       .then((res) => res.json())
       .then((data) => {
         setTotalProducts(data.total);

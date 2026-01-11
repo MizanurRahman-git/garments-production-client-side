@@ -10,8 +10,8 @@ const ManageAllProducts = () => {
   const { data: products = [] , refetch} = useQuery({
     queryKey: ["all-products"],
     queryFn: async () => {
-      const result = await axiosSecure("/products");
-      return result.data;
+      const res = await axiosSecure("/products");
+      return res.data.result;
     },
   });
 

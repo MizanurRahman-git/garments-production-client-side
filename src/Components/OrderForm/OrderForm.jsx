@@ -163,7 +163,7 @@ const OrderForm = () => {
         </div>
         <input
           type="submit"
-          className="btn btn-primary text-white w-full mt-5"
+          className="group mt-4 inline-flex w-full items-center justify-center gap-3 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 px-6 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-indigo-500 hover:scale-[1.02]"
           value="Confirm"
         />
       </form>

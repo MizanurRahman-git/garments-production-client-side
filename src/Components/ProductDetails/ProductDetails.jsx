@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link, useParams } from "react-router";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { HiOutlineCurrencyBangladeshi } from "react-icons/hi";
 
 const ProductDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,85 +23,88 @@ const ProductDetails = () => {
     category,
     productPrice,
     availableQuantity,
-    minimumQuantity, paymentOptions, _id
+    minimumQuantity,
+    paymentOptions,
+    _id,
   } = product;
-  return (
-    <div className="mx-auto my-10 flex flex-col lg:flex-row justify-between w-full gap-12">
-      <title>{productName}</title>
-      <div className="flex flex-col gap-6 flex-1">
-        <div>
-          <div className="w-full overflow-hidden rounded-xl">
-            <img
-              className="object-cover h-120 w-full"
-              src={image}
-              alt="header image"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="md:gap-10 flex-1">
-        <h1 className="font-bold text-3xl">{productName}</h1>
-        <hr className="my-6" />
-        <div>
-          {" "}
-          <p>Description:</p>
-          <h1
-            className="
-          text-lg font-light text-neutral-500"
-          >
-            {description}
-          </h1>
-        </div>
-        <hr className="my-6" />
 
-        <div
-          className="
-                text-xl 
-                font-semibold 
-                flex 
-                flex-row 
-                items-center
-                gap-2
-              "
-        >
-          <div>Category: {category}</div>
+  return (
+    <section className="max-w-7xl mx-auto px-6 py-16">
+      <title>{productName}</title>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+        {/* ================= Image Section ================= */}
+        <div className="relative group">
+          <div className="absolute inset-0 rounded-3xl bg-indigo-600/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-500" />
+
+          <img
+            src={image}
+            alt={productName}
+            className="relative w-full h-[460px] object-cover rounded-3xl shadow-2xl transition-transform duration-700 group-hover:scale-105"
+          />
+
+          {/* Category Badge */}
+          <span className="absolute top-5 left-5 rounded-full bg-indigo-600 px-4 py-1 text-sm font-semibold text-white shadow-lg">
+            {category}
+          </span>
         </div>
-        <hr className="my-6" />
-        <div className="flex justify-between items-center px-8">
-          <p
-            className="
-                gap-4 
-                font-light
-                text-neutral-500
-              "
-          >
-            Available Quantity: {availableQuantity} Only!
-          </p>
-          <p
-            className="
-                gap-4 
-                font-light
-                text-neutral-500
-              "
-          >
-           Minimum Order: {minimumQuantity} Only!
-          </p>
-        </div>
-        <hr className="my-6" />
-        <div className="flex justify-between">
-          <p className="font-bold text-3xl text-gray-500">
-            Price: {productPrice}$
-          </p>
-          <p>
-            <span className="font-medium text-xl text-gray-500">Payment Method: </span>{paymentOptions}
-          </p>
-          
-        </div>
-        <div className="mt-10">
-            <Link to={`/orderform/${_id}`} className="btn btn-primary w-full">Order Now</Link>
+
+        {/* ================= Content Section ================= */}
+        <div className="space-y-8">
+          <h1 className="text-3xl md:text-4xl font-bold ">
+            {productName}
+          </h1>
+
+          {/* Description */}
+          <p className=" leading-relaxed">{description}</p>
+
+          {/* Info Cards */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="rounded-xl border border-indigo-500/20 bg-indigo-50 px-4 py-3">
+              <p className="text-xs text-indigo-500 uppercase">
+                Available Stock
+              </p>
+              <p className="font-semibold text-slate-900">
+                {availableQuantity} Units
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-indigo-500/20 bg-indigo-50 px-4 py-3">
+              <p className="text-xs text-indigo-500 uppercase">Minimum Order</p>
+              <p className="font-semibold text-slate-900">
+                {minimumQuantity} Units
+              </p>
+            </div>
           </div>
+
+          {/* Price & Payment */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="flex items-center text-3xl font-bold text-indigo-600">
+              {productPrice}
+              <HiOutlineCurrencyBangladeshi className="text-4xl ml-1" />
+            </p>
+
+            <p className="text-slate-600">
+              <span className="font-semibold ">
+                Payment Method:
+              </span>{" "}
+              {paymentOptions}
+            </p>
+          </div>
+
+          {/* CTA */}
+          <Link
+            to={`/orderform/${_id}`}
+            className="group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 px-6 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-indigo-500 hover:scale-[1.02]"
+          >
+            🛒 Order Now
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

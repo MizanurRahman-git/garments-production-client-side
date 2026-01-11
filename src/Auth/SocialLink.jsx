@@ -6,35 +6,46 @@ import { Bounce, toast } from "react-toastify";
 
 const SocialLink = () => {
   const { signWithGoogle } = useAuth();
-  const axiosIntance = useAxios()
-  const navigate = useNavigate()
+  const axiosIntance = useAxios();
+  const navigate = useNavigate();
 
   const handleGoogle = () => {
     signWithGoogle()
       .then((result) => {
-        console.log(result);
+        
+        toast.success("🦄 Welcome!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL,
-          role: "Buyer"
+          role: "Buyer",
         };
 
         axiosIntance.post("/users", userInfo).then((res) => {
           navigate(location?.state || "/");
-          console.log(res.data);
+          
           if (res.data.insertedId) {
             toast.success("🦄 Welcome!", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
           }
         });
       })

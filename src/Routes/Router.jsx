@@ -51,11 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/productDetails/:id",
-        element: (
-          <PrivateRoute>
-            <ProductDetails />
-          </PrivateRoute>
-        ),
+        element: <ProductDetails />,
       },
       {
         path: "/orderform/:id",
@@ -172,9 +168,9 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '*',
-    element: <ErrorPage/>
-  }
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
 
 export default router;

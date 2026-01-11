@@ -5,7 +5,7 @@ import AuthImage from "../assets/login.png";
 
 const AuthLayouts = () => {
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2">
       <div>
         <Link to='/' className="flex ms-14">
           <Logo />

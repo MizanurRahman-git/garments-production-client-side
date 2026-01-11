@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "./Logo/Logo";
 import useAuth from "../Hooks/useAuth";
+import { Bounce, toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -19,7 +20,19 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then()
+      .then(()=> {
+        toast.success("🦄 Wow Log Out Success!", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -36,7 +49,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-md rounded-2xl mt-5">
+    <div className="navbar bg-base-100 md:px-16 shadow-md  mt-5">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -88,10 +101,10 @@ const Navbar = () => {
               className="menu dropdown-content bg-base-200 rounded-box z-10 mt-4 w-52 p-2 shadow-sm"
             >
               <li>
-                <button onClick={handleLogOut}>Log Out</button>
+                <p>{user.displayName}</p>
               </li>
               <li>
-                <p>{user.displayName}</p>
+                <button onClick={handleLogOut}>Log Out</button>
               </li>
               <li>
                 <p>Theme</p>

@@ -1,26 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../Hooks/useAxios";
 import ProductCard from "../Components/ProductCard/ProductCard";
 
 const AllProducts = () => {
   const axiosInstance = useAxios();
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState("");
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const limit = 8;
 
   const { data: products = [] } = useQuery({
-    queryKey: ["all-products", searchText],
+    queryKey: ["all-products", searchText,currentPage],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/products?searchText=${searchText}`);
-      return res?.data;
+      const res = await axiosInstance.get(
+        `/products?searchText=${searchText}&limit=${limit}&skip=${currentPage * limit}`
+      );
+      return res?.data?.result;
     },
   });
 
-
+  useEffect(() => {
+    fetch("http://localhost:3000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setTotalProducts(data.total);
+        const pages = Math.ceil(data.total / limit);
+        setTotalPage(pages);
+      });
+  }, []);
   return (
     <div className="my-10">
       <title>All-Products</title>
       <div className="flex flex-col md:flex-row justify-between my-5 items-center px-3.5">
-        <h1 className="font-bold text-2xl">Available Products:</h1>
+        <h1 className="font-bold text-2xl">
+          Available Products:{totalProducts}
+        </h1>
         <label className="input">
           <svg
             className="h-[1em] opacity-50"
@@ -38,17 +55,29 @@ const AllProducts = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input 
-          onChange={(e)=> setSearchText(e.target.value)}
-          type="search" 
-          placeholder="Search" />
+          <input
+            onChange={(e) => setSearchText(e.target.value)}
+            type="search"
+            placeholder="Search"
+          />
         </label>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
+      </div>
+      <div className="my-10 flex gap-3 justify-end flex-wrap">
+        {
+          currentPage > 0 && <button onClick={()=>setCurrentPage(currentPage - 1)} className="btn">Prev</button>
+        }
+        {[...Array(totalPage).keys()].map((i) => (
+          <button onClick={()=> setCurrentPage(i)} className={`btn ${i=== currentPage && "btn-primary"}`}>{i+1}</button>
+        ))}
+        {
+          currentPage < totalPage-1 && <button onClick={()=>setCurrentPage(currentPage + 1)} className="btn">Next</button>
+        }
       </div>
     </div>
   );
